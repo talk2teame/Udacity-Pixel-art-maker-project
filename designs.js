@@ -13,8 +13,37 @@ $("#sizePicker").submit(function(e){
 });
 
 
-function makeGrid(height, width) {
 
+
+
+function clickHandler(){
+    var that = $(this);
+
+    $(this).on("click", function (event) {
+        let clickedItem = event.target.id
+        let checker = clickedItem.slice(0,4)
+        if(checker === 'cell'){
+            console.log(clickedItem, 'hey hey from the other side');
+
+            // console.log(event.target.id, 'hey man target')
+            // $(this).css('background-color', '#ff0000');
+
+            let color = $('#colorPicker').val();
+            $('td').css('background-color','color');
+        }
+    });
+    // console.log(clickedBtnID, 'hahaha it worked!!!')
+}
+
+
+	//Add color to the cell clicked
+	// $('td').click(function() {
+	// 	let color = $('#colorPicker').val();
+	// 	$('td').css('background-color','color');
+    // });
+    
+
+function makeGrid(height, width) {
 // Your code goes here!
     $('tr').remove();
 
@@ -23,26 +52,22 @@ function makeGrid(height, width) {
     }
     
     for (let x = 0; x < width; x++) {
-
-        $('tr').append('<td id=" "></td>');
-        $('tr').append(`<td id="+ "></td>`);
-
+        $('tr').append('<td onClick="clickHandler()"></td>');
     }
+
+    var count = 1;
+    $('td').each(function(){
+        $(this).attr('id', 'cell' + count);
+        count+=1;
+    })
 }
 
 
-function colorCell(){
-    console.log(arguments.values)
-}
 
-
-$('#colorPicker').change(function(){
-  var colorPicked =  $(this).val()
-
-  console.log(colorPicked, 'hahahah')
-})
-
-
+// $('#colorPicker').change(function(){
+//   var colorPicked =  $(this).val()
+//   console.log(colorPicked, 'hahahah')
+// })
 
 
 
